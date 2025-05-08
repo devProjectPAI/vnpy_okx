@@ -59,30 +59,21 @@ This means that will use OKX simulation account api.
 
 
 
-
-## Introduction
-
-This gateway is developed based on OKX's V5 REST and Websocket API, and supports spot, linear contract and inverse contract trading.
-
-**For derivatives contract trading, please notice:**
-
-1. Only supports one-way position mode.
-
 ## Install
 
-Users can easily install ``vnpy_okx`` by pip according to the following command.
+Users can only install ``vnpy_okx`` manually as following command.
 
 ```
-pip install vnpy_okx
+python3 setup.py build
+```
+```
+python3 setup.py install
 ```
 
-Also, users can install ``vnpy_okx`` using the source code. Clone the repository and install as follows:
+If there is an permission error when installing, Please try to use:
 
-```
-git clone https://github.com/veighna-global/vnpy_okx.git && cd vnpy_okx
+sudo python3 setup.py install
 
-python setup.py install
-```
 
 ## A Simple Example
 
