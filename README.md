@@ -1,15 +1,42 @@
 # OKX trading gateway for VeighNa Evo
 
-<p align="center">
-  <img src ="https://vnpy.oss-cn-shanghai.aliyuncs.com/vnpy-logo.png"/>
-</p>
+Copy from: https://github.com/veighna-global/vnpy_okx
 
-<p align="center">
-    <img src ="https://img.shields.io/badge/version-2024.4.3-blueviolet.svg"/>
-    <img src ="https://img.shields.io/badge/platform-windows|linux|macos-yellow.svg"/>
-    <img src ="https://img.shields.io/badge/python-3.10|3.11|3.12-blue.svg" />
-    <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
-</p>
+**5 issues Fixed:**
+
+1. Wrong mode checking:
+   orginal code is "TEST", which must be changed to "DEMO" as below:
+if server == "DEMO":
+    self.simulated = True
+
+self.simulated is used to set header with a field: "x-simulated-trading: 1".
+This means that will use OKX simulation account api.
+
+2. Parameters Error of return:
+   ts, o, h, l, c, vol, _volCcy, _volCcyQuote, _confirm = bar_list
+   Orignal code has no such three parameters: _volCcy, _volCcyQuote, _confirm.
+   Must add these three parameters, even we don't use them.
+
+3. string to float Error in on_query_contract:
+   Add one function "is_float" to avoid exception when call string to float.
+
+4. Trade Order parameters error in FUTURES order type.
+   The orignal code's SPOT order is all right.
+   But when using the FUTURE order, there is an error returned by okx api : posSide parameter is missing.
+   So we need add this "posSide" parameter when trade order type is FUTURES.
+   The "send_order" function's code has been changed to fix it.
+
+5. FUTURES type order's amount unit error:
+   In OKX, the FUTURES type order's amount unit is not 1. It is 0.01.
+   ( Normal trade order SPOT type, the unit is 1.)
+   In the orignal code, BTC-USDT trade order:
+        SPOT order: amount is 1, the order submitted. the amount of order's status is 1.
+        FUTURES order: amount is 1, the order submitted. the amount of order's status is 0.01.
+
+   So use a constant variable SWAP_FUTURES_VOL_FIX=100 to fix the amount when submitting trade order and querying order's status with FUTURES order type.
+
+
+
 
 ## Introduction
 
