@@ -5,12 +5,18 @@ Copy from: https://github.com/veighna-global/vnpy_okx
 **5 issues Fixed:**
 
 1. Wrong mode checking:
+   
    orginal code is "TEST", which must be changed to "DEMO" as below:
+
 if server == "DEMO":
+
     self.simulated = True
 
+
 self.simulated is used to set header with a field: "x-simulated-trading: 1".
+
 This means that will use OKX simulation account api.
+
 
 2. Parameters Error of return:
    ts, o, h, l, c, vol, _volCcy, _volCcyQuote, _confirm = bar_list
