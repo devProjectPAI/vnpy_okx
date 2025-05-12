@@ -75,7 +75,7 @@ If there is an permission error when installing, Please try to use:
 sudo python3 setup.py install
 
 
-## A Simple Example
+## A Simple Example : Need a demo stragety python file to run this sample, which is doing based on "trend_strategy" in the https://github.com/veighna-global/vnpy_novastrategy
 
 Save this as run.py.
 
